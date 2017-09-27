@@ -7,13 +7,13 @@ from lib.config import settings
 import traceback
 
 class PluginManager():
-    def __init__(self):
+    def __init__(self,hostname=None):
         self.mode=settings.MODE
         self.saltname=settings.SALTNAME
         self.plugin_item=settings.PLUGIN_ITEMS
         self.test=settings.TEST
+        self.hostname=hostname
         if self.mode=="SSH":
-            self.hostname = settings.SSH_HOSTNAME
             self.username = settings.SSH_USERNAME
             self.password = settings.SSH_PASSWORD
             self.port = settings.SSH_PORT
@@ -34,7 +34,7 @@ class PluginManager():
             server_info[k]=info
         return server_info
     def exec_cmd(self,cmd):
-        if self.mode=="ANGET":
+        if self.mode=="AGENT":
             import subprocess
             result=subprocess.getoutput("ifconfig")
         elif self.mode=="SSH":

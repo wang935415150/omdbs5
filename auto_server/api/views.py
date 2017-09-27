@@ -5,6 +5,6 @@ from django.views.decorators.csrf import csrf_exempt,csrf_protect
 import json
 @csrf_exempt
 def server(request):
-    ret=json.loads(request.body)
+    ret=json.loads(request.body.decode("utf-8"))
     print(ret["nic"])
     return HttpResponse("ok")

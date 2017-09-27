@@ -1,2 +1,4 @@
 *.pyc
 .idea/*
+auto_server/.idea/*
+auto_client/.idea/*
