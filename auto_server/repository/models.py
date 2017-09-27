@@ -1,64 +1,64 @@
 from django.db import models
 
 # Create your models here.
-
-class Asset(models.Model):
-    """
-    资产信息表，所有资产公共信息（交换机，服务器，防火墙等）
-    """
-    device_type_choices = (
-        (1, '服务器'),
-        (2, '交换机'),
-        (3, '防火墙'),
-    )
-    device_status_choices = (
-        (1, '上架'),
-        (2, '在线'),
-        (3, '离线'),
-        (4, '下架'),
-    )
-
-    device_type_id = models.IntegerField(choices=device_type_choices, default=1)
-    device_status_id = models.IntegerField(choices=device_status_choices, default=1)
-
-    cabinet_num = models.CharField('机柜号', max_length=30, null=True, blank=True)
-    cabinet_order = models.CharField('机柜中序号', max_length=30, null=True, blank=True)
-
-    #idc = models.ForeignKey('IDC', verbose_name='IDC机房', null=True, blank=True)
-    #business_unit = models.ForeignKey('BusinessUnit', verbose_name='属于的业务线', null=True, blank=True)
-
-    #tag = models.ManyToManyField('Tag')
-
-    latest_date = models.DateField(null=True)
-    create_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        verbose_name_plural = "资产表"
-
-    def __str__(self):
-        return "%s-%s-%s" % (self.idc.name
-
-, self.cabinet_num, self.cabinet_order)
-
-class NetworkDevice(models.Model):
-    asset = models.OneToOneField('Asset')
-    management_ip = models.CharField('管理IP', max_length=64, blank=True, null=True)
-    vlan_ip = models.CharField('VlanIP', max_length=64, blank=True, null=True)
-    intranet_ip = models.CharField('内网IP', max_length=128, blank=True, null=True)
-    sn = models.CharField('SN号', max_length=64, unique=True)
-    manufacture = models.CharField(verbose_name=u'制造商', max_length=128, null=True, blank=True)
-    model = models.CharField('型号', max_length=128, null=True, blank=True)
-    port_num = models.SmallIntegerField('端口个数', null=True, blank=True)
-    device_detail = models.CharField('设置详细配置', max_length=255, null=True, blank=True)
-
-    class Meta:
-        verbose_name_plural = "网络设备"
+#
+# class Asset(models.Model):
+#     """
+#     资产信息表，所有资产公共信息（交换机，服务器，防火墙等）
+#     """
+#     device_type_choices = (
+#         (1, '服务器'),
+#         (2, '交换机'),
+#         (3, '防火墙'),
+#     )
+#     device_status_choices = (
+#         (1, '上架'),
+#         (2, '在线'),
+#         (3, '离线'),
+#         (4, '下架'),
+#     )
+#
+#     device_type_id = models.IntegerField(choices=device_type_choices, default=1)
+#     device_status_id = models.IntegerField(choices=device_status_choices, default=1)
+#
+#     cabinet_num = models.CharField('机柜号', max_length=30, null=True, blank=True)
+#     cabinet_order = models.CharField('机柜中序号', max_length=30, null=True, blank=True)
+#
+#     #idc = models.ForeignKey('IDC', verbose_name='IDC机房', null=True, blank=True)
+#     #business_unit = models.ForeignKey('BusinessUnit', verbose_name='属于的业务线', null=True, blank=True)
+#
+#     #tag = models.ManyToManyField('Tag')
+#
+#     latest_date = models.DateField(null=True)
+#     create_at = models.DateTimeField(auto_now_add=True)
+#
+#     class Meta:
+#         verbose_name_plural = "资产表"
+#
+#     def __str__(self):
+#         return "%s-%s-%s" % (self.idc.name
+#
+# , self.cabinet_num, self.cabinet_order)
+#
+# class NetworkDevice(models.Model):
+#     asset = models.OneToOneField('Asset')
+#     management_ip = models.CharField('管理IP', max_length=64, blank=True, null=True)
+#     vlan_ip = models.CharField('VlanIP', max_length=64, blank=True, null=True)
+#     intranet_ip = models.CharField('内网IP', max_length=128, blank=True, null=True)
+#     sn = models.CharField('SN号', max_length=64, unique=True)
+#     manufacture = models.CharField(verbose_name=u'制造商', max_length=128, null=True, blank=True)
+#     model = models.CharField('型号', max_length=128, null=True, blank=True)
+#     port_num = models.SmallIntegerField('端口个数', null=True, blank=True)
+#     device_detail = models.CharField('设置详细配置', max_length=255, null=True, blank=True)
+#
+#     class Meta:
+#         verbose_name_plural = "网络设备"
 
 class Server(models.Model):
     """
     服务器信息
     """
-    asset = models.OneToOneField('Asset')
+    # asset = models.OneToOneField('Asset')
 
     hostname = models.CharField(max_length=128, unique=True)
     sn = models.CharField('SN号', max_length=64, db_index=True)

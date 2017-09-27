@@ -10,6 +10,9 @@ sys.path.append(BASEDIR)
 PLUGIN_ITEMS = {
     "nic":"src.plugins.nic.Nic",
     "disk":"src.plugins.disk.Disk",
+    "board":"src.plugins.board.Board",
+    "basic":"src.plugins.basic.Basic",
+    "memory":"src.plugins.memory.Memory",
 }
 
 API="http://127.0.0.1:8000/api/server.html"
@@ -23,4 +26,4 @@ SALTNAME='*'
 
 TEST=True
 
-MODE='SSH' #只能写ANGET/SSH/SALT
+MODE='AGENT' #只能写AGENT/SSH/SALT
