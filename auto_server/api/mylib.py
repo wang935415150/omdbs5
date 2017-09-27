@@ -26,15 +26,10 @@ def add_info(ret):
             memory_dic=memory_info[i]
             models.Memory.objects.create(server_obj=server_obj,**memory_dic)
     else:
-        nic_obj=server_obj.nic.values('name','hwaddr','netmask','ipaddrs','up')
+        nic_obj=server_obj.nic.values('name','hwaddr','netmask','ipaddrs','up')[:]
         new_nic_info=[]
         for k,v in nic_info.items():
             v['name']=k
             new_nic_info.append(v)
-
-        set(list(nic_obj))
-        set(new_nic_info)
-        # set1={1,2}
-        # set2={1,2,3,4}
-        #
-        # print (set1 & set2)
+        inter = dict.fromkeys([x for x in new_nic_info if x in nic_obj])
+        print (inter)
